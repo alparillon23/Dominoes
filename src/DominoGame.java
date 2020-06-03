@@ -103,6 +103,7 @@ public class DominoGame {
         //While someone can play do
         while(someoneCanPlay(db)){
             a = (a + 1) % (noOfBots + noOfHumans);
+            //gets random card from the deck if theres some remaining
             while(de.size() != 0 && players.get(a).returnGoodDomino(db) == 0){
                 Random rd = new Random(load--);
                 int card = rd.nextInt();
@@ -110,9 +111,11 @@ public class DominoGame {
                 de.remove(card);
                 de.trimToSize();
             }
+            //a player has won
             if(players.get(a).handSize() == 0){
                 break;
             }
+            //player tries to play a domino
             players.get(a).play(db);
         }
 
