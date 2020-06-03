@@ -67,10 +67,12 @@ public class DominoGame {
     }
 
     private void startRound(){
+        //Making a Copy of the Dominoes
         ArrayList<Domino> de = new ArrayList<>();
         for(Domino e: TABLEOFDOMINOS){
             de.add(e);
         }
+        //for rand 0- No of Dominoes less 1
         int load = de.size() - 1;
         //Give the players their dominos
         for(int i=0; i<players.size(); i++){
