@@ -69,18 +69,22 @@ public abstract class DominoPlayer {
         Domino d = dominos.get(0);
         int reg = d.getTop() + d.getBottom();
         for(Domino p: dominos){
-            if((p.getTop() + p.getBottom())< reg)
+            if((p.getTop() + p.getBottom())< reg) {
                 reg = p.getTop() + p.getBottom();
                 d = p;
+            }
         }
-        return new DominoBoard(d);
+        Domino e = new Domino(d.getTop(), d.getBottom());
+        dominos.remove(d);
+        return new DominoBoard(e);
     }
 
     public void showHand(){
-        System.out.println("Your current hand is: ");
+        System.out.println(getName() + ", your current hand is: ");
         for(Domino a: dominos){
-            System.out.println("["+a.getTop()+"||"+a.getBottom()+"]");
+            System.out.print("\t["+a.getTop()+"||"+a.getBottom()+"]");
         }
+        System.out.println();
     }
 
     public void wipeHand(){

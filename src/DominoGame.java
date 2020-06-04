@@ -104,6 +104,10 @@ public class DominoGame {
         DominoBoard db = players.get(a).initDomino();
         //While someone can play do
         while(someoneCanPlay(db)){
+            //a player has won
+            if(players.get(a).handSize() == 0){
+                break;
+            }
             a = (a + 1) % (noOfBots + noOfHumans);
             //gets random card from the deck if theres some remaining
             while(de.size() != 0 && players.get(a).returnGoodDomino(db) == 0){
@@ -113,16 +117,13 @@ public class DominoGame {
                 de.remove(card);
                 de.trimToSize();
             }
-            //a player has won
-            if(players.get(a).handSize() == 0){
-                break;
-            }
+
             //player tries to play a domino
             players.get(a).play(db);
         }
 
         //If nobody can play do
-        if(players.get(a).handSize() == 0){
+        if(players.get(a).handSize() == 0){ //that player has won
             int totalCashIn = 0;
             for(int i = 0; i < players.size(); i++){
                 totalCashIn += players.get(i).getRemainder();
@@ -146,6 +147,9 @@ public class DominoGame {
             totalCashIn -= players.get(a).getRemainder();
             players.get(a).addScore(totalCashIn);
             System.out.println(players.get(a).getName() + " has won the round (" + players.get(a).getScore()+" pts)");
+        }
+        for(DominoPlayer dp: players){
+            dp.showHand();
         }
         System.out.println("The Rankings");
         for(DominoPlayer dp : players){
